@@ -47,24 +47,26 @@ vertex Vertex frameLine_vertex_main(device Vertex *vertices [[buffer(0)]],
     switch(vid)
     {
         case 0:
-            outVertex.position = float4(pa.x,pa.y,position1.z - 0.001,position1.w);
+            outVertex.position = float4(pa.x,pa.y,position1.z,position1.w);
             break;
         case 1:
-            outVertex.position = float4(pb.x,pb.y,position1.z - 0.001,position1.w);
+            outVertex.position = float4(pb.x,pb.y,position1.z,position1.w);
             break;
         case 2:
-            outVertex.position = float4(pc.x,pc.y,position2.z - 0.001,position2.w);
+            outVertex.position = float4(pc.x,pc.y,position2.z,position2.w);
             break;
         case 3:
-            outVertex.position = float4(pa.x,pa.y,position1.z - 0.001,position1.w);
+            outVertex.position = float4(pa.x,pa.y,position1.z,position1.w);
             break;
         case 4:
-            outVertex.position = float4(pc.x,pc.y,position2.z - 0.001,position2.w);
+            outVertex.position = float4(pc.x,pc.y,position2.z,position2.w);
             break;
         case 5:
-            outVertex.position = float4(pd.x,pd.y,position2.z - 0.001,position2.w);
+            outVertex.position = float4(pd.x,pd.y,position2.z,position2.w);
             break;
     }
+    
+    outVertex.position.z -= 0.001;
     
     return outVertex;
 }
