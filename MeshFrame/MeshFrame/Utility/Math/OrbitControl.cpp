@@ -1,6 +1,6 @@
 //
 //  OrbitControl.cpp
-//  Scanner
+//  Learn-Metal
 //
 //  Created by  沈江洋 on 25/01/2018.
 //  Copyright © 2018  沈江洋. All rights reserved.
