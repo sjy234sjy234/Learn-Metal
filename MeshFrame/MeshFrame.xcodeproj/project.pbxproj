@@ -1,0 +1,434 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B020B7D12136718A00866DAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B020B7D02136718A00866DAE /* AppDelegate.m */; };
+		B020B7D72136718A00866DAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B020B7D52136718A00866DAE /* Main.storyboard */; };
+		B020B7D92136718B00866DAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B020B7D82136718B00866DAE /* Assets.xcassets */; };
+		B020B7DC2136718B00866DAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B020B7DA2136718B00866DAE /* LaunchScreen.storyboard */; };
+		B020B7DF2136718B00866DAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B020B7DE2136718B00866DAE /* main.m */; };
+		B020B7F7213671C500866DAE /* MetalContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = B020B7E7213671C500866DAE /* MetalContext.mm */; };
+		B020B7F8213671C500866DAE /* MetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = B020B7EA213671C500866DAE /* MetalView.m */; };
+		B020B7FB213671C500866DAE /* OrbitControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B020B7F3213671C500866DAE /* OrbitControl.cpp */; };
+		B020B7FC213671C500866DAE /* MathUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B020B7F5213671C500866DAE /* MathUtilities.cpp */; };
+		B020B7FF213671DB00866DAE /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B020B7FD213671DB00866DAE /* ViewController.mm */; };
+		B020B8102137A3B200866DAE /* frame.metal in Sources */ = {isa = PBXBuildFile; fileRef = B020B80D2137A3B200866DAE /* frame.metal */; };
+		B020B8112137A3B300866DAE /* FrameRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B020B80F2137A3B200866DAE /* FrameRenderer.mm */; };
+		B034AEBC213D1ED900F3AA74 /* mesh.bin in Resources */ = {isa = PBXBuildFile; fileRef = B034AEBB213D1ED900F3AA74 /* mesh.bin */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B020B7CC2136718A00866DAE /* MeshFrame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeshFrame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B020B7CF2136718A00866DAE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B020B7D02136718A00866DAE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B020B7D62136718A00866DAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B020B7D82136718B00866DAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B020B7DB2136718B00866DAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B020B7DD2136718B00866DAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B020B7DE2136718B00866DAE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B020B7E7213671C500866DAE /* MetalContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MetalContext.mm; sourceTree = "<group>"; };
+		B020B7E8213671C500866DAE /* MetalContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalContext.h; sourceTree = "<group>"; };
+		B020B7EA213671C500866DAE /* MetalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetalView.m; sourceTree = "<group>"; };
+		B020B7EB213671C500866DAE /* MetalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalView.h; sourceTree = "<group>"; };
+		B020B7F3213671C500866DAE /* OrbitControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OrbitControl.cpp; sourceTree = "<group>"; };
+		B020B7F4213671C500866DAE /* MathUtilities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MathUtilities.hpp; sourceTree = "<group>"; };
+		B020B7F5213671C500866DAE /* MathUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MathUtilities.cpp; sourceTree = "<group>"; };
+		B020B7F6213671C500866DAE /* OrbitControl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OrbitControl.hpp; sourceTree = "<group>"; };
+		B020B7FD213671DB00866DAE /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		B020B7FE213671DB00866DAE /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B020B80D2137A3B200866DAE /* frame.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = frame.metal; sourceTree = "<group>"; };
+		B020B80E2137A3B200866DAE /* FrameRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameRenderer.h; sourceTree = "<group>"; };
+		B020B80F2137A3B200866DAE /* FrameRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FrameRenderer.mm; sourceTree = "<group>"; };
+		B034AEBB213D1ED900F3AA74 /* mesh.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = mesh.bin; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B020B7C92136718A00866DAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B020B7C32136718A00866DAE = {
+			isa = PBXGroup;
+			children = (
+				B020B7CE2136718A00866DAE /* MeshFrame */,
+				B020B7CD2136718A00866DAE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B020B7CD2136718A00866DAE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B020B7CC2136718A00866DAE /* MeshFrame.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B020B7CE2136718A00866DAE /* MeshFrame */ = {
+			isa = PBXGroup;
+			children = (
+				B020B7E5213671C500866DAE /* Metal */,
+				B020B7F1213671C500866DAE /* Utility */,
+				B020B7CF2136718A00866DAE /* AppDelegate.h */,
+				B020B7D02136718A00866DAE /* AppDelegate.m */,
+				B020B7FE213671DB00866DAE /* ViewController.h */,
+				B020B7FD213671DB00866DAE /* ViewController.mm */,
+				B034AEBB213D1ED900F3AA74 /* mesh.bin */,
+				B020B7D52136718A00866DAE /* Main.storyboard */,
+				B020B7D82136718B00866DAE /* Assets.xcassets */,
+				B020B7DA2136718B00866DAE /* LaunchScreen.storyboard */,
+				B020B7DD2136718B00866DAE /* Info.plist */,
+				B020B7DE2136718B00866DAE /* main.m */,
+			);
+			path = MeshFrame;
+			sourceTree = "<group>";
+		};
+		B020B7E5213671C500866DAE /* Metal */ = {
+			isa = PBXGroup;
+			children = (
+				B020B7E6213671C500866DAE /* MetalContext */,
+				B020B7E9213671C500866DAE /* MetalView */,
+				B020B7EC213671C500866DAE /* MetalRenderer */,
+			);
+			path = Metal;
+			sourceTree = "<group>";
+		};
+		B020B7E6213671C500866DAE /* MetalContext */ = {
+			isa = PBXGroup;
+			children = (
+				B020B7E7213671C500866DAE /* MetalContext.mm */,
+				B020B7E8213671C500866DAE /* MetalContext.h */,
+			);
+			path = MetalContext;
+			sourceTree = "<group>";
+		};
+		B020B7E9213671C500866DAE /* MetalView */ = {
+			isa = PBXGroup;
+			children = (
+				B020B7EA213671C500866DAE /* MetalView.m */,
+				B020B7EB213671C500866DAE /* MetalView.h */,
+			);
+			path = MetalView;
+			sourceTree = "<group>";
+		};
+		B020B7EC213671C500866DAE /* MetalRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				B020B80C2137A3B200866DAE /* FrameRenderer */,
+			);
+			path = MetalRenderer;
+			sourceTree = "<group>";
+		};
+		B020B7F1213671C500866DAE /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				B020B7F2213671C500866DAE /* Math */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		B020B7F2213671C500866DAE /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				B020B7F3213671C500866DAE /* OrbitControl.cpp */,
+				B020B7F4213671C500866DAE /* MathUtilities.hpp */,
+				B020B7F5213671C500866DAE /* MathUtilities.cpp */,
+				B020B7F6213671C500866DAE /* OrbitControl.hpp */,
+			);
+			path = Math;
+			sourceTree = "<group>";
+		};
+		B020B80C2137A3B200866DAE /* FrameRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				B020B80E2137A3B200866DAE /* FrameRenderer.h */,
+				B020B80F2137A3B200866DAE /* FrameRenderer.mm */,
+				B020B80D2137A3B200866DAE /* frame.metal */,
+			);
+			path = FrameRenderer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B020B7CB2136718A00866DAE /* MeshFrame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B020B7E22136718B00866DAE /* Build configuration list for PBXNativeTarget "MeshFrame" */;
+			buildPhases = (
+				B020B7C82136718A00866DAE /* Sources */,
+				B020B7C92136718A00866DAE /* Frameworks */,
+				B020B7CA2136718A00866DAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MeshFrame;
+			productName = MeshFrame;
+			productReference = B020B7CC2136718A00866DAE /* MeshFrame.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B020B7C42136718A00866DAE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = " 沈江洋";
+				TargetAttributes = {
+					B020B7CB2136718A00866DAE = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = B020B7C72136718A00866DAE /* Build configuration list for PBXProject "MeshFrame" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B020B7C32136718A00866DAE;
+			productRefGroup = B020B7CD2136718A00866DAE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B020B7CB2136718A00866DAE /* MeshFrame */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B020B7CA2136718A00866DAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B020B7DC2136718B00866DAE /* LaunchScreen.storyboard in Resources */,
+				B020B7D92136718B00866DAE /* Assets.xcassets in Resources */,
+				B034AEBC213D1ED900F3AA74 /* mesh.bin in Resources */,
+				B020B7D72136718A00866DAE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B020B7C82136718A00866DAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B020B7DF2136718B00866DAE /* main.m in Sources */,
+				B020B7FB213671C500866DAE /* OrbitControl.cpp in Sources */,
+				B020B7D12136718A00866DAE /* AppDelegate.m in Sources */,
+				B020B7F7213671C500866DAE /* MetalContext.mm in Sources */,
+				B020B7FC213671C500866DAE /* MathUtilities.cpp in Sources */,
+				B020B7F8213671C500866DAE /* MetalView.m in Sources */,
+				B020B8102137A3B200866DAE /* frame.metal in Sources */,
+				B020B8112137A3B300866DAE /* FrameRenderer.mm in Sources */,
+				B020B7FF213671DB00866DAE /* ViewController.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B020B7D52136718A00866DAE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B020B7D62136718A00866DAE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B020B7DA2136718B00866DAE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B020B7DB2136718B00866DAE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B020B7E02136718B00866DAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B020B7E12136718B00866DAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B020B7E32136718B00866DAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KPUEQ6PE83;
+				INFOPLIST_FILE = MeshFrame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jiangyang.MeshFrame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B020B7E42136718B00866DAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KPUEQ6PE83;
+				INFOPLIST_FILE = MeshFrame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jiangyang.MeshFrame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B020B7C72136718A00866DAE /* Build configuration list for PBXProject "MeshFrame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B020B7E02136718B00866DAE /* Debug */,
+				B020B7E12136718B00866DAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B020B7E22136718B00866DAE /* Build configuration list for PBXNativeTarget "MeshFrame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B020B7E32136718B00866DAE /* Debug */,
+				B020B7E42136718B00866DAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B020B7C42136718A00866DAE /* Project object */;
+}
