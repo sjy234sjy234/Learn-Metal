@@ -35,8 +35,7 @@
     
     self.metalContext=[MetalContext newContext];
     
-    self.myMetalView=[[MetalView alloc] init];
-    self.myMetalView.frame=CGRectMake(10, 100, 300, 400);
+    self.myMetalView=[[MetalView alloc] initWithFrame: self.view.frame];
     self.myMetalView.backgroundColor = [UIColor grayColor];
     self.myMetalView.delegate = self;
     [self.view addSubview:self.myMetalView];

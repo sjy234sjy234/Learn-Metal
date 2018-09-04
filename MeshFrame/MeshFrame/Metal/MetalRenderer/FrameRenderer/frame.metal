@@ -19,13 +19,19 @@ struct MvpTransform
     float4x4 matrix;
 };
 
+struct WHRatio
+{
+    float ratio;
+};
+
 vertex Vertex frameLine_vertex_main(device Vertex *vertices [[buffer(0)]],
                                device uint2 *lineIndices [[buffer(1)]],
                                constant MvpTransform *mvpTransform [[buffer(2)]],
+                               constant WHRatio *whRatio [[buffer(3)]],
                                uint vid [[vertex_id]],
                                uint iid [[instance_id]])
 {
-    float thickness=0.01;
+    float thickness=0.03;
     uint lineIndex1=lineIndices[iid].x;
     uint lineIndex2=lineIndices[iid].y;
     
@@ -38,6 +44,7 @@ vertex Vertex frameLine_vertex_main(device Vertex *vertices [[buffer(0)]],
     float2 p0 = float2(position1.x,position1.y);
     float2 v0 = float2(v.x,v.y);
     float2 v1 = thickness * normalize(v0) * float2x2(float2(0,-1),float2(1,0));
+    v1.x /= whRatio->ratio;
     float2 pa = p0 + v1;
     float2 pb = p0 - v1;
     float2 pc = p0 - v1 + v0;
