@@ -49,6 +49,7 @@
 
 - (void)buildFrameRenderer
 {
+    /*
     const float cubeVertices[] =
     {
         -100,  100,  100,
@@ -90,11 +91,11 @@
     m_modelTransform = simd::float4(onesFloat4);
     //mvp matrix
     const simd::float4x4 mvpTransform = m_proTransform * m_viewTransform * m_modelTransform;
+    */
     
-    /*
     //load asset and parse vertex and index
     NSString *resourcepath = [[NSBundle mainBundle] resourcePath];
-    NSString *mesh_path = [resourcepath stringByAppendingString:@"/mesh.bin"];
+    NSString *mesh_path = [resourcepath stringByAppendingString:@"/sjy.bin"];
     const char* mesh_path_c_str = [mesh_path UTF8String];
     std::ifstream mesh_fin(mesh_path_c_str);
     int nvb =  [self readInt: mesh_fin];
@@ -111,7 +112,6 @@
     xMax = yMax = zMax = -1000000;
     for(int i = 0; i < nvb; ++i)
     {
-        vertexBase[3 * i + 2] += 400.0;
         xMin = min(xMin, vertexBase[3 * i]);
         xMax = max(xMax, vertexBase[3 * i]);
         yMin = min(yMin, vertexBase[3 * i + 1]);
@@ -140,7 +140,7 @@
     m_modelTransform = simd::float4(onesFloat4);
     //mvp matrix
     const simd::float4x4 mvpTransform = m_proTransform * m_viewTransform * m_modelTransform;
-     */
+     
 }
 
 //MetalViewDelegate

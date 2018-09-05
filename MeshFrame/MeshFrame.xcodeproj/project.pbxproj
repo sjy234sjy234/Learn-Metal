@@ -19,7 +19,7 @@
 		B020B7FF213671DB00866DAE /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B020B7FD213671DB00866DAE /* ViewController.mm */; };
 		B020B8102137A3B200866DAE /* frame.metal in Sources */ = {isa = PBXBuildFile; fileRef = B020B80D2137A3B200866DAE /* frame.metal */; };
 		B020B8112137A3B300866DAE /* FrameRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B020B80F2137A3B200866DAE /* FrameRenderer.mm */; };
-		B034AEBC213D1ED900F3AA74 /* mesh.bin in Resources */ = {isa = PBXBuildFile; fileRef = B034AEBB213D1ED900F3AA74 /* mesh.bin */; };
+		B0A0BEA8213FE6DC00514B3B /* sjy.bin in Resources */ = {isa = PBXBuildFile; fileRef = B0A0BEA7213FE6DC00514B3B /* sjy.bin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +44,7 @@
 		B020B80D2137A3B200866DAE /* frame.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = frame.metal; sourceTree = "<group>"; };
 		B020B80E2137A3B200866DAE /* FrameRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameRenderer.h; sourceTree = "<group>"; };
 		B020B80F2137A3B200866DAE /* FrameRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FrameRenderer.mm; sourceTree = "<group>"; };
-		B034AEBB213D1ED900F3AA74 /* mesh.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = mesh.bin; sourceTree = "<group>"; };
+		B0A0BEA7213FE6DC00514B3B /* sjy.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = sjy.bin; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +83,7 @@
 				B020B7D02136718A00866DAE /* AppDelegate.m */,
 				B020B7FE213671DB00866DAE /* ViewController.h */,
 				B020B7FD213671DB00866DAE /* ViewController.mm */,
-				B034AEBB213D1ED900F3AA74 /* mesh.bin */,
+				B0A0BEA7213FE6DC00514B3B /* sjy.bin */,
 				B020B7D52136718A00866DAE /* Main.storyboard */,
 				B020B7D82136718B00866DAE /* Assets.xcassets */,
 				B020B7DA2136718B00866DAE /* LaunchScreen.storyboard */,
@@ -215,9 +215,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0A0BEA8213FE6DC00514B3B /* sjy.bin in Resources */,
 				B020B7DC2136718B00866DAE /* LaunchScreen.storyboard in Resources */,
 				B020B7D92136718B00866DAE /* Assets.xcassets in Resources */,
-				B034AEBC213D1ED900F3AA74 /* mesh.bin in Resources */,
 				B020B7D72136718A00866DAE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
