@@ -1,0 +1,111 @@
+//
+//  TextureRenderer.m
+//  Learn-Metal
+//
+//  Created by  沈江洋 on 28/12/2017.
+//  Copyright © 2017  沈江洋. All rights reserved.
+//
+
+#import "TextureRenderer.h"
+#import "MathUtilities.hpp"
+
+@interface TextureRenderer ()
+@property (nonatomic, strong) MetalContext *metalContext;
+
+@property (nonatomic, strong) id<MTLSamplerState> samplerState;
+@property (nonatomic, strong) id<MTLRenderPipelineState> textureRenderPipeline;
+@property (nonatomic, strong) id<MTLBuffer> textureVertexBuffer;
+
+@end
+
+@implementation TextureRenderer
+
+- (instancetype)initWithContext: (MetalContext *)context
+{
+    if ((self = [super init]))
+    {
+        _metalContext=context;
+        [self buildPipelines];
+        [self buildResources];
+    }
+    return self;
+}
+
+- (void)buildPipelines
+{
+    NSError *error = nil;
+    id<MTLLibrary> library = _metalContext.library;
+    
+    id<MTLFunction> textureVertexFunc = [library newFunctionWithName:@"texture_vertex_main"];
+    id<MTLFunction> textureFragmentFunc = [library newFunctionWithName:@"texture_fragment_main"];
+    
+    MTLRenderPipelineDescriptor *texturePipelineDescriptor = [MTLRenderPipelineDescriptor new];
+    texturePipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
+    texturePipelineDescriptor.vertexFunction = textureVertexFunc;
+    texturePipelineDescriptor.fragmentFunction = textureFragmentFunc;
+    
+    _textureRenderPipeline = [_metalContext.device newRenderPipelineStateWithDescriptor:texturePipelineDescriptor
+                                                                                  error:&error];
+    
+    if (!_textureRenderPipeline)
+    {
+        NSLog(@"Error occurred when creating texture render pipeline state: %@", error);
+    }
+}
+
+- (void)buildResources
+{
+    const TextureVertex textureVertices[] =
+    {
+        { .position = { -1.0, -1.0, 0, 1 }, .texCoords = { 0.0, 1.0 } },
+        { .position = { -1.0,  1.0, 0, 1 }, .texCoords = { 0.0, 0.0 } },
+        { .position = {  1.0, -1.0, 0, 1 }, .texCoords = { 1.0, 1.0 } },
+        { .position = {  1.0,  1.0, 0, 1 }, .texCoords = { 1.0, 0.0 } }
+    };
+    _textureVertexBuffer = [_metalContext.device newBufferWithBytes:textureVertices
+                                                             length:sizeof(textureVertices)
+                                                            options:MTLResourceOptionCPUCacheModeDefault];
+}
+
+- (void)drawVideoFrameWithCommandEncoder:(id<MTLRenderCommandEncoder>)renderEncoder andInTexture: (id<MTLTexture>) inTexture
+{
+    // create sampler state
+    MTLSamplerDescriptor *samplerDesc = [MTLSamplerDescriptor new];
+    samplerDesc.sAddressMode = MTLSamplerAddressModeClampToEdge;
+    samplerDesc.tAddressMode = MTLSamplerAddressModeClampToEdge;
+    samplerDesc.minFilter = MTLSamplerMinMagFilterNearest;
+    samplerDesc.magFilter = MTLSamplerMinMagFilterLinear;
+    samplerDesc.mipFilter = MTLSamplerMipFilterLinear;
+    _samplerState = [_metalContext.device newSamplerStateWithDescriptor:samplerDesc];
+    
+    [renderEncoder setRenderPipelineState:_textureRenderPipeline];
+    [renderEncoder setFragmentTexture:inTexture atIndex:0];
+    [renderEncoder setFragmentSamplerState:_samplerState atIndex:0];
+    [renderEncoder setVertexBuffer: _textureVertexBuffer offset:0 atIndex:0];
+    [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:3];
+    [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:1 vertexCount:3];
+    
+}
+
+- (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer sourceTexture: (id<MTLTexture>) inTexture destinationDrawable: (id<CAMetalDrawable>) drawable
+{
+    id<MTLTexture> framebufferTexture = drawable.texture;
+    if (drawable)
+    {
+        MTLRenderPassDescriptor *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
+        passDescriptor.colorAttachments[0].texture = framebufferTexture;
+        passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1.0, 0.0, 1.0, 1);
+        passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
+        passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
+        
+        id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
+        
+        [self drawVideoFrameWithCommandEncoder:renderEncoder andInTexture:inTexture];
+        
+        [renderEncoder endEncoding];
+        
+        [commandBuffer presentDrawable:drawable];
+    }
+}
+
+@end
