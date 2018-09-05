@@ -1,15 +1,15 @@
 //
-//  TextureRenderer.m
+//  TextureRendererEncoder.m
 //  Learn-Metal
 //
 //  Created by  沈江洋 on 28/12/2017.
 //  Copyright © 2017  沈江洋. All rights reserved.
 //
 
-#import "TextureRenderer.h"
+#import "TextureRendererEncoder.h"
 #import "MathUtilities.hpp"
 
-@interface TextureRenderer ()
+@interface TextureRendererEncoder ()
 @property (nonatomic, strong) MetalContext *metalContext;
 
 @property (nonatomic, strong) id<MTLSamplerState> samplerState;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation TextureRenderer
+@implementation TextureRendererEncoder
 
 - (instancetype)initWithContext: (MetalContext *)context
 {

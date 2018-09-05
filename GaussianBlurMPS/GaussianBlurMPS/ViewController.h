@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <Metal/Metal.h>
-#import <MetalPerformanceShaders/MetalPerformanceShaders.h>
 
 @interface ViewController : UIViewController
 

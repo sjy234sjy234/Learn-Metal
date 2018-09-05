@@ -10,7 +10,7 @@
 
 #import "MetalContext.h"
 #import "MetalView.h"
-#import "TextureRenderer.h"
+#import "VideoGaussianRenderer.h"
 
 #import "FrontCamera.h"
 
@@ -18,9 +18,7 @@
 
 @property (nonatomic, strong) MetalContext *metalContext;
 @property (nonatomic, strong) MetalView *mainMetalView;
-@property (nonatomic, strong) TextureRenderer *textureRenderer;
-@property (nonatomic, strong) MPSUnaryImageKernel *gaussianBlurKernel;
-@property (nonatomic, strong) id<MTLTexture> outTexture;
+@property (nonatomic, strong) VideoGaussianRenderer *videoGaussianRenderer;
 
 @property (nonatomic, strong) FrontCamera *frontCamera;
 
@@ -39,33 +37,17 @@
     self.mainMetalView.delegate = self;
     
     self.metalContext = [MetalContext newContext];
-    
-    self.textureRenderer = [[TextureRenderer alloc] initWithContext: _metalContext];
-    self.gaussianBlurKernel = [[MPSImageGaussianBlur alloc] initWithDevice: _metalContext.device sigma: 10.0];
+
+    self.videoGaussianRenderer = [[VideoGaussianRenderer alloc] initWithLayer: _mainMetalView.metalLayer andContext: _metalContext andSigma: 10.0];
     
     self.frontCamera=[[FrontCamera alloc] initWithDepthTag:NO];
     self.frontCamera.delegate=self;
-    
-    [self buildOutTexture];
 }
 
 - (void)addObserver
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-}
-
-- (void)buildOutTexture
-{
-    size_t width, height;
-    [self.frontCamera getFrameWidth: &width andFrameHeight: &height];
-    MTLTextureDescriptor *textureDescriptor = [[MTLTextureDescriptor alloc] init];
-    textureDescriptor.textureType = MTLTextureType2D;
-    textureDescriptor.pixelFormat = MTLPixelFormatBGRA8Unorm;
-    textureDescriptor.width = width;
-    textureDescriptor.height = height;
-    textureDescriptor.usage = MTLTextureUsageShaderRead|MTLTextureUsageShaderWrite|MTLTextureUsageRenderTarget;
-    self.outTexture = [_metalContext.device newTextureWithDescriptor:textureDescriptor];
 }
 
 - (void)willResignActive
@@ -88,24 +70,7 @@
 {
     if(videoPixelBuffer)
     {
-        //pixel buffer to MTLTexture
-        id<MTLTexture> inTexture = [_metalContext textureFromPixelBuffer: videoPixelBuffer];
-        
-        //new commander buffer
-        id<MTLCommandBuffer> commandBuffer = [_metalContext.commandQueue commandBuffer];
-        commandBuffer.label = @"GaussianBlurMPSCommand";
-        
-        //encode gaussion process
-        [_gaussianBlurKernel encodeToCommandBuffer: commandBuffer sourceTexture: inTexture destinationTexture: _outTexture];
-        
-        //encode drawable render process
-        id<CAMetalDrawable> drawable = [self.mainMetalView.metalLayer nextDrawable];
-        [_textureRenderer encodeToCommandBuffer: commandBuffer sourceTexture: _outTexture destinationDrawable: drawable];
-        
-        //commit commander buffer
-        [commandBuffer presentDrawable:drawable];
-        [commandBuffer commit];
-        [commandBuffer waitUntilCompleted];
+        [_videoGaussianRenderer render: videoPixelBuffer];
     }
 }
 

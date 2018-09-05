@@ -1,5 +1,5 @@
 //
-//  TextureRenderer.h
+//  TextureRendererEncoder.h
 //  Learn-Metal
 //
 //  Created by  沈江洋 on 28/12/2017.
@@ -13,7 +13,7 @@
 
 #import "MetalContext.h"
 
-@interface TextureRenderer : NSObject
+@interface TextureRendererEncoder : NSObject
 
 - (instancetype)initWithContext: (MetalContext *)context;
 - (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer sourceTexture: (id<MTLTexture>) inTexture destinationDrawable: (id<CAMetalDrawable>) drawable;

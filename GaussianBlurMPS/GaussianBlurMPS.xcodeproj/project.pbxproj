@@ -15,11 +15,13 @@
 		B0C3FE33213F7AFF0077A43B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C3FE32213F7AFF0077A43B /* main.m */; };
 		B0C3FE4F213F7BB10077A43B /* MetalContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = B0C3FE3B213F7BB10077A43B /* MetalContext.mm */; };
 		B0C3FE50213F7BB10077A43B /* MetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C3FE3E213F7BB10077A43B /* MetalView.m */; };
-		B0C3FE51213F7BB10077A43B /* TextureRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B0C3FE42213F7BB10077A43B /* TextureRenderer.mm */; };
-		B0C3FE52213F7BB10077A43B /* TextureRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = B0C3FE44213F7BB10077A43B /* TextureRenderer.metal */; };
+		B0C3FE51213F7BB10077A43B /* TextureRendererEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = B0C3FE42213F7BB10077A43B /* TextureRendererEncoder.mm */; };
+		B0C3FE52213F7BB10077A43B /* TextureRendererEncoder.metal in Sources */ = {isa = PBXBuildFile; fileRef = B0C3FE44213F7BB10077A43B /* TextureRendererEncoder.metal */; };
 		B0C3FE53213F7BB10077A43B /* OrbitControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0C3FE48213F7BB10077A43B /* OrbitControl.cpp */; };
 		B0C3FE54213F7BB10077A43B /* MathUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0C3FE4A213F7BB10077A43B /* MathUtilities.cpp */; };
 		B0C3FE55213F7BB10077A43B /* FrontCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C3FE4E213F7BB10077A43B /* FrontCamera.m */; };
+		B0D4AD60213FEDF000A892B7 /* GaussianBlurEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D4AD5F213FEDF000A892B7 /* GaussianBlurEncoder.m */; };
+		B0D4AD67213FF60200A892B7 /* VideoGaussianRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D4AD66213FF60200A892B7 /* VideoGaussianRenderer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,15 +39,19 @@
 		B0C3FE3C213F7BB10077A43B /* MetalContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalContext.h; sourceTree = "<group>"; };
 		B0C3FE3E213F7BB10077A43B /* MetalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetalView.m; sourceTree = "<group>"; };
 		B0C3FE3F213F7BB10077A43B /* MetalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalView.h; sourceTree = "<group>"; };
-		B0C3FE42213F7BB10077A43B /* TextureRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TextureRenderer.mm; sourceTree = "<group>"; };
-		B0C3FE43213F7BB10077A43B /* TextureRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureRenderer.h; sourceTree = "<group>"; };
-		B0C3FE44213F7BB10077A43B /* TextureRenderer.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = TextureRenderer.metal; sourceTree = "<group>"; };
+		B0C3FE42213F7BB10077A43B /* TextureRendererEncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TextureRendererEncoder.mm; sourceTree = "<group>"; };
+		B0C3FE43213F7BB10077A43B /* TextureRendererEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureRendererEncoder.h; sourceTree = "<group>"; };
+		B0C3FE44213F7BB10077A43B /* TextureRendererEncoder.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = TextureRendererEncoder.metal; sourceTree = "<group>"; };
 		B0C3FE48213F7BB10077A43B /* OrbitControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OrbitControl.cpp; sourceTree = "<group>"; };
 		B0C3FE49213F7BB10077A43B /* MathUtilities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MathUtilities.hpp; sourceTree = "<group>"; };
 		B0C3FE4A213F7BB10077A43B /* MathUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MathUtilities.cpp; sourceTree = "<group>"; };
 		B0C3FE4B213F7BB10077A43B /* OrbitControl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OrbitControl.hpp; sourceTree = "<group>"; };
 		B0C3FE4D213F7BB10077A43B /* FrontCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrontCamera.h; sourceTree = "<group>"; };
 		B0C3FE4E213F7BB10077A43B /* FrontCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrontCamera.m; sourceTree = "<group>"; };
+		B0D4AD5E213FEDF000A892B7 /* GaussianBlurEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GaussianBlurEncoder.h; sourceTree = "<group>"; };
+		B0D4AD5F213FEDF000A892B7 /* GaussianBlurEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GaussianBlurEncoder.m; sourceTree = "<group>"; };
+		B0D4AD65213FF60200A892B7 /* VideoGaussianRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoGaussianRenderer.h; sourceTree = "<group>"; };
+		B0D4AD66213FF60200A892B7 /* VideoGaussianRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoGaussianRenderer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 				B0C3FE3A213F7BB10077A43B /* MetalContext */,
 				B0C3FE3D213F7BB10077A43B /* MetalView */,
 				B0C3FE40213F7BB10077A43B /* MetalRenderer */,
+				B0D4AD5C213FECB400A892B7 /* MetalEncoder */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
@@ -124,19 +131,19 @@
 		B0C3FE40213F7BB10077A43B /* MetalRenderer */ = {
 			isa = PBXGroup;
 			children = (
-				B0C3FE41213F7BB10077A43B /* TextureRenderer */,
+				B0D4AD64213FF5E200A892B7 /* VideoGaussianRenderer */,
 			);
 			path = MetalRenderer;
 			sourceTree = "<group>";
 		};
-		B0C3FE41213F7BB10077A43B /* TextureRenderer */ = {
+		B0C3FE41213F7BB10077A43B /* TextureRendererEncoder */ = {
 			isa = PBXGroup;
 			children = (
-				B0C3FE42213F7BB10077A43B /* TextureRenderer.mm */,
-				B0C3FE43213F7BB10077A43B /* TextureRenderer.h */,
-				B0C3FE44213F7BB10077A43B /* TextureRenderer.metal */,
+				B0C3FE42213F7BB10077A43B /* TextureRendererEncoder.mm */,
+				B0C3FE43213F7BB10077A43B /* TextureRendererEncoder.h */,
+				B0C3FE44213F7BB10077A43B /* TextureRendererEncoder.metal */,
 			);
-			path = TextureRenderer;
+			path = TextureRendererEncoder;
 			sourceTree = "<group>";
 		};
 		B0C3FE45213F7BB10077A43B /* Utility */ = {
@@ -174,6 +181,33 @@
 				B0C3FE4E213F7BB10077A43B /* FrontCamera.m */,
 			);
 			path = Device;
+			sourceTree = "<group>";
+		};
+		B0D4AD5C213FECB400A892B7 /* MetalEncoder */ = {
+			isa = PBXGroup;
+			children = (
+				B0D4AD5D213FEDCB00A892B7 /* GaussianBlurEncoder */,
+				B0C3FE41213F7BB10077A43B /* TextureRendererEncoder */,
+			);
+			path = MetalEncoder;
+			sourceTree = "<group>";
+		};
+		B0D4AD5D213FEDCB00A892B7 /* GaussianBlurEncoder */ = {
+			isa = PBXGroup;
+			children = (
+				B0D4AD5E213FEDF000A892B7 /* GaussianBlurEncoder.h */,
+				B0D4AD5F213FEDF000A892B7 /* GaussianBlurEncoder.m */,
+			);
+			path = GaussianBlurEncoder;
+			sourceTree = "<group>";
+		};
+		B0D4AD64213FF5E200A892B7 /* VideoGaussianRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				B0D4AD65213FF60200A892B7 /* VideoGaussianRenderer.h */,
+				B0D4AD66213FF60200A892B7 /* VideoGaussianRenderer.m */,
+			);
+			path = VideoGaussianRenderer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,12 +282,14 @@
 			files = (
 				B0C3FE28213F7AFE0077A43B /* ViewController.m in Sources */,
 				B0C3FE33213F7AFF0077A43B /* main.m in Sources */,
+				B0D4AD60213FEDF000A892B7 /* GaussianBlurEncoder.m in Sources */,
 				B0C3FE53213F7BB10077A43B /* OrbitControl.cpp in Sources */,
 				B0C3FE25213F7AFE0077A43B /* AppDelegate.m in Sources */,
-				B0C3FE52213F7BB10077A43B /* TextureRenderer.metal in Sources */,
+				B0C3FE52213F7BB10077A43B /* TextureRendererEncoder.metal in Sources */,
+				B0D4AD67213FF60200A892B7 /* VideoGaussianRenderer.m in Sources */,
 				B0C3FE54213F7BB10077A43B /* MathUtilities.cpp in Sources */,
 				B0C3FE4F213F7BB10077A43B /* MetalContext.mm in Sources */,
-				B0C3FE51213F7BB10077A43B /* TextureRenderer.mm in Sources */,
+				B0C3FE51213F7BB10077A43B /* TextureRendererEncoder.mm in Sources */,
 				B0C3FE55213F7BB10077A43B /* FrontCamera.m in Sources */,
 				B0C3FE50213F7BB10077A43B /* MetalView.m in Sources */,
 			);
