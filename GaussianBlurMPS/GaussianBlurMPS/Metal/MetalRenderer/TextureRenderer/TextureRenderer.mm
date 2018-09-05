@@ -103,8 +103,6 @@
         [self drawVideoFrameWithCommandEncoder:renderEncoder andInTexture:inTexture];
         
         [renderEncoder endEncoding];
-        
-        [commandBuffer presentDrawable:drawable];
     }
 }
 

@@ -103,6 +103,7 @@
         [_textureRenderer encodeToCommandBuffer: commandBuffer sourceTexture: _outTexture destinationDrawable: drawable];
         
         //commit commander buffer
+        [commandBuffer presentDrawable:drawable];
         [commandBuffer commit];
         [commandBuffer waitUntilCompleted];
     }
