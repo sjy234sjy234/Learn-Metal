@@ -65,10 +65,7 @@
     _textureVertexBuffer = [_metalContext.device newBufferWithBytes:textureVertices
                                                              length:sizeof(textureVertices)
                                                             options:MTLResourceOptionCPUCacheModeDefault];
-}
-
-- (void)drawVideoFrameWithCommandEncoder:(id<MTLRenderCommandEncoder>)renderEncoder andInTexture: (id<MTLTexture>) inTexture
-{
+    
     // create sampler state
     MTLSamplerDescriptor *samplerDesc = [MTLSamplerDescriptor new];
     samplerDesc.sAddressMode = MTLSamplerAddressModeClampToEdge;
@@ -77,14 +74,6 @@
     samplerDesc.magFilter = MTLSamplerMinMagFilterLinear;
     samplerDesc.mipFilter = MTLSamplerMipFilterLinear;
     _samplerState = [_metalContext.device newSamplerStateWithDescriptor:samplerDesc];
-    
-    [renderEncoder setRenderPipelineState:_textureRenderPipeline];
-    [renderEncoder setFragmentTexture:inTexture atIndex:0];
-    [renderEncoder setFragmentSamplerState:_samplerState atIndex:0];
-    [renderEncoder setVertexBuffer: _textureVertexBuffer offset:0 atIndex:0];
-    [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:3];
-    [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:1 vertexCount:3];
-    
 }
 
 - (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer sourceTexture: (id<MTLTexture>) inTexture destinationDrawable: (id<CAMetalDrawable>) drawable
@@ -100,7 +89,12 @@
         
         id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
         
-        [self drawVideoFrameWithCommandEncoder:renderEncoder andInTexture:inTexture];
+        [renderEncoder setRenderPipelineState:_textureRenderPipeline];
+        [renderEncoder setFragmentTexture:inTexture atIndex:0];
+        [renderEncoder setFragmentSamplerState:_samplerState atIndex:0];
+        [renderEncoder setVertexBuffer: _textureVertexBuffer offset:0 atIndex:0];
+        [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:3];
+        [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:1 vertexCount:3];
         
         [renderEncoder endEncoding];
     }
