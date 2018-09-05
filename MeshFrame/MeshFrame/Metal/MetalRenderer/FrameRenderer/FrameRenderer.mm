@@ -19,6 +19,7 @@
 @property (nonatomic, strong) id<MTLBuffer> lineIndexBuffer;
 @property (nonatomic, strong) id<MTLBuffer> mvpTransformBuffer;
 @property (nonatomic, strong) id<MTLBuffer> whRatioBuffer;
+@property (nonatomic, strong) id<MTLBuffer> thicknessBuffer;
 
 @property (nonatomic, strong) id<MTLTexture> depthTexture;
 @property (nonatomic, strong) id<MTLDepthStencilState> depthState;
@@ -116,6 +117,19 @@
     
     _whRatioBuffer = [_metalContext.device newBufferWithLength:sizeof(float)
                                                       options:MTLResourceOptionCPUCacheModeDefault];
+    
+    const float thickness = 0.001;
+    _thicknessBuffer = [_metalContext.device newBufferWithLength:sizeof(float)
+                                                                          options:MTLResourceOptionCPUCacheModeDefault];
+    memcpy([_thicknessBuffer contents], &thickness, sizeof(float));
+    
+}
+
+- (void)setThickNess: (float) thickness
+{
+    thickness = thickness < 0.0 ? 0.0 : thickness;
+    thickness = thickness > 1.0 ? 1.0 : thickness;
+    memcpy([_thicknessBuffer contents], &thickness, sizeof(float));
 }
 
 - (void)setupFrameWithVertex: (const float *) vertices andIndex: (const uint32_t *)indices andVertexNum: (int) vertexNum andFaceNum: (int) faceNum
@@ -201,6 +215,7 @@
         [commandEncoder setVertexBuffer: _lineIndexBuffer offset:0 atIndex:1];
         [commandEncoder setVertexBuffer: _mvpTransformBuffer offset:0 atIndex:2];
         [commandEncoder setVertexBuffer: _whRatioBuffer offset:0 atIndex:3];
+        [commandEncoder setVertexBuffer: _thicknessBuffer offset:0 atIndex:4];
         [commandEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6 instanceCount: _lineIndexBuffer.length / (2 * sizeof(uint32_t))];
         [commandEncoder endEncoding];
         

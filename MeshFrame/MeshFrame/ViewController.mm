@@ -71,6 +71,7 @@
     };
     self.frameRenderer = [[FrameRenderer alloc] initWithLayer: self.myMetalView.metalLayer andContext: _metalContext];
     [self.frameRenderer setupFrameWithVertex:cubeVertices andIndex: cubeIndices andVertexNum: 8 andFaceNum: 12];
+    [self.frameRenderer setThickNess: 0.01];
     
     //projection matrix
     simd::float4 onesFloat4={1.0,1.0,1.0,1.0};

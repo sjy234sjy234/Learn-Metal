@@ -15,6 +15,7 @@
 @interface FrameRenderer : NSObject
 
 - (instancetype)initWithLayer:(CAMetalLayer *)layer andContext: (MetalContext *)context;
+- (void)setThickNess: (float) thickness;
 - (void)setupFrameWithVertex: (const float *) vertices andIndex: (const uint32_t *)indices andVertexNum: (int) vertexNum andFaceNum: (int) faceNum;
 - (void)drawWithMvpMatrix:  (simd::float4x4)mvpTransform;
 
