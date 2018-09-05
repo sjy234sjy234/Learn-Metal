@@ -51,21 +51,24 @@
         textureDescriptor.width = inTexture.width;
         textureDescriptor.height = inTexture.height;
         textureDescriptor.usage = inTexture.usage;
-        id<MTLTexture> outTemp =  [_metalContext.device newTextureWithDescriptor:textureDescriptor];
+        id<MTLTexture> outTexture =  [_metalContext.device newTextureWithDescriptor:textureDescriptor];
         
         //new commander buffer
         id<MTLCommandBuffer> commandBuffer = [_metalContext.commandQueue commandBuffer];
         commandBuffer.label = @"GaussianBlurMPSCommand";
         
         //encode gaussion process
-        [_gaussianBlurEncoder encodeToCommandBuffer: commandBuffer srcTexture: inTexture dstTexture: outTemp];
+        [_gaussianBlurEncoder encodeToCommandBuffer: commandBuffer srcTexture: inTexture dstTexture: outTexture];
         
         //encode drawable render process
-        
-        [_textureRendererEncoder encodeToCommandBuffer: commandBuffer sourceTexture: outTemp destinationDrawable: drawable];
+        id<CAMetalDrawable> drawable = [_layer nextDrawable];
+        if(drawable)
+        {
+            [_textureRendererEncoder encodeToCommandBuffer: commandBuffer sourceTexture: outTexture destinationTexture: drawable.texture];
+            [commandBuffer presentDrawable:drawable];
+        }
         
         //commit commander buffer
-        [commandBuffer presentDrawable:drawable];
         [commandBuffer commit];
         [commandBuffer waitUntilCompleted];
     }

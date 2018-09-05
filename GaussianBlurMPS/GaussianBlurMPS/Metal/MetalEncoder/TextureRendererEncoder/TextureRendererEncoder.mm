@@ -76,28 +76,35 @@
     _samplerState = [_metalContext.device newSamplerStateWithDescriptor:samplerDesc];
 }
 
-- (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer sourceTexture: (id<MTLTexture>) inTexture destinationDrawable: (id<CAMetalDrawable>) drawable
+- (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer sourceTexture: (id<MTLTexture>) inTexture destinationTexture: (id<MTLTexture>) outTexture
 {
-    id<MTLTexture> framebufferTexture = drawable.texture;
-    if (drawable)
+    if(!commandBuffer)
     {
-        MTLRenderPassDescriptor *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
-        passDescriptor.colorAttachments[0].texture = framebufferTexture;
-        passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1.0, 0.0, 1.0, 1);
-        passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-        passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-        
-        id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
-        
-        [renderEncoder setRenderPipelineState:_textureRenderPipeline];
-        [renderEncoder setFragmentTexture:inTexture atIndex:0];
-        [renderEncoder setFragmentSamplerState:_samplerState atIndex:0];
-        [renderEncoder setVertexBuffer: _textureVertexBuffer offset:0 atIndex:0];
-        [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:3];
-        [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:1 vertexCount:3];
-        
-        [renderEncoder endEncoding];
+        NSLog(@"invalid command buffer");
+        return ;
     }
+    
+    if(!inTexture || !outTexture)
+    {
+        NSLog(@"invalid texture");
+        return ;
+    }
+    
+    MTLRenderPassDescriptor *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
+    passDescriptor.colorAttachments[0].texture = outTexture;
+    passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1.0, 0.0, 1.0, 1);
+    passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
+    passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
+    
+    id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
+    
+    [renderEncoder setRenderPipelineState:_textureRenderPipeline];
+    [renderEncoder setFragmentTexture:inTexture atIndex:0];
+    [renderEncoder setFragmentSamplerState:_samplerState atIndex:0];
+    [renderEncoder setVertexBuffer: _textureVertexBuffer offset:0 atIndex:0];
+    [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:3];
+    [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:1 vertexCount:3];
+    [renderEncoder endEncoding];
 }
 
 @end

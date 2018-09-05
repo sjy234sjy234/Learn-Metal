@@ -16,6 +16,5 @@
 @interface TextureRendererEncoder : NSObject
 
 - (instancetype)initWithContext: (MetalContext *)context;
-- (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer sourceTexture: (id<MTLTexture>) inTexture destinationDrawable: (id<CAMetalDrawable>) drawable;
-
+- (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer sourceTexture: (id<MTLTexture>) inTexture destinationTexture: (id<MTLTexture>) outTexture;
 @end
