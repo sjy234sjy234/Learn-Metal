@@ -203,6 +203,22 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     [self.videoDevice unlockForConfiguration];
 }
 
+- (void)getFrameWidth: (size_t *) width andFrameHeight: (size_t *)height
+{
+    CMVideoDimensions dimension = CMVideoFormatDescriptionGetDimensions(_videoDevice.activeFormat.formatDescription);
+    AVCaptureConnection *videoConnection = [_videoDataOutput connectionWithMediaType:AVMediaTypeVideo];
+    if(AVCaptureVideoOrientationPortrait == videoConnection.videoOrientation)
+    {
+        *width = dimension.height;
+        *height = dimension.width;
+    }
+    else
+    {
+        *width = dimension.width;
+        *height = dimension.height;
+    }
+}
+
 - (void)dataOutputSynchronizer:(AVCaptureDataOutputSynchronizer *)synchronizer didOutputSynchronizedDataCollection:(AVCaptureSynchronizedDataCollection *)synchronizedDataCollection{
     if([self.delegate respondsToSelector:@selector(didOutputVideoBuffer:andDepthBuffer:)])
     {

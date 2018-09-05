@@ -25,5 +25,6 @@
 - (void)startCapture;
 - (void)stopCapture;
 - (void)setExposurePoint: (CGPoint) pos;
+- (void)getFrameWidth: (size_t *) width andFrameHeight: (size_t *)height;
 
 @end
