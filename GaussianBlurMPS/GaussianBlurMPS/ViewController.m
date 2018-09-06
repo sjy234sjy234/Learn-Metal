@@ -36,7 +36,7 @@
     [self.view addSubview: self.mainMetalView];
     self.mainMetalView.delegate = self;
     
-    self.metalContext = [MetalContext newContext];
+    self.metalContext = [MetalContext shareMetalContext];
 
     self.videoGaussianRenderer = [[VideoGaussianRenderer alloc] initWithLayer: _mainMetalView.metalLayer andContext: _metalContext andSigma: 10.0];
     

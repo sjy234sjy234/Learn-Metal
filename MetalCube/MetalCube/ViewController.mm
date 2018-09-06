@@ -47,7 +47,7 @@ typedef struct
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.metalContext=[MetalContext newContext];
+    self.metalContext = [MetalContext shareMetalContext];
     
     self.myMetalView=[[MetalView alloc] init];
     self.myMetalView.frame=CGRectMake(10, 100, 300, 400);

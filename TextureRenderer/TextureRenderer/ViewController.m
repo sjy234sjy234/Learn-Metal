@@ -36,7 +36,7 @@
     [self.view addSubview: self.mainMetalView];
     self.mainMetalView.delegate = self;
     
-    self.metalContext = [MetalContext newContext];
+    self.metalContext = [MetalContext shareMetalContext];
     
     self.textureRenderer = [[TextureRenderer alloc] initWithLayer: self.mainMetalView.metalLayer andContext: _metalContext];
     

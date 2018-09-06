@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.metalContext=[MetalContext newContext];
+    self.metalContext = [MetalContext shareMetalContext];
     
     self.myMetalView=[[MetalView alloc] initWithFrame: self.view.frame];
     self.myMetalView.backgroundColor = [UIColor grayColor];

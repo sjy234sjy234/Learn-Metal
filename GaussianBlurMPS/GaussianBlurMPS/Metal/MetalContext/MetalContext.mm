@@ -3,6 +3,18 @@
 
 @implementation MetalContext
 
+static MetalContext *_instance;
++(instancetype)shareMetalContext
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (_instance == nil) {
+            _instance = [[self alloc] initWithDevice:nil];
+        }
+    });
+    return _instance;
+}
+
 + (instancetype)newContext
 {
     return [[self alloc] initWithDevice:nil];

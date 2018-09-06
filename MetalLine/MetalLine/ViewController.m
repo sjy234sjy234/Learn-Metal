@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.metalContext=[MetalContext newContext];
+    self.metalContext = [MetalContext shareMetalContext];
     
     self.myMetalView=[[MetalView alloc] init];
     self.myMetalView.frame=CGRectMake(10, 150, 300, 300);

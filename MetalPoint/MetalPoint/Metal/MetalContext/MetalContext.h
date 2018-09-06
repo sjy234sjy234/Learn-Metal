@@ -9,6 +9,10 @@
 @property (strong) id<MTLLibrary> library;
 @property (strong) id<MTLCommandQueue> commandQueue;
 
++(instancetype)shareMetalContext;
+
 + (instancetype)newContext;
+
+- (id<MTLTexture>) textureFromPixelBuffer:(CVPixelBufferRef)videoPixelBuffer;
 
 @end
