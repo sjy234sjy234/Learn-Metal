@@ -61,16 +61,11 @@
         [_gaussianBlurEncoder encodeToCommandBuffer: commandBuffer srcTexture: inTexture dstTexture: outTexture];
         
         //encode drawable render process
-        id<CAMetalDrawable> drawable = [_layer nextDrawable];
-        if(drawable)
-        {
-            [_textureRendererEncoder encodeToCommandBuffer: commandBuffer sourceTexture: outTexture destinationTexture: drawable.texture];
-            [commandBuffer presentDrawable:drawable];
-        }
+        [_textureRendererEncoder encodeToCommandBuffer: commandBuffer sourceTexture: outTexture destinationTexture: drawable.texture];
+        [commandBuffer presentDrawable:drawable];
         
         //commit commander buffer
         [commandBuffer commit];
-        [commandBuffer waitUntilCompleted];
     }
 }
 
