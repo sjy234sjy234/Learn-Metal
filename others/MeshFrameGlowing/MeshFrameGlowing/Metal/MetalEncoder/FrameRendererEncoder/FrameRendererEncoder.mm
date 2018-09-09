@@ -147,19 +147,11 @@
                   andFaceNum: (int) faceNum
 {
     //vertex
-    _vertexBuffer = [_metalContext.device newBufferWithLength: vertexNum * 4 * 4 options:MTLResourceOptionCPUCacheModeDefault];
-    void *pointBaseAddress=_vertexBuffer.contents;
-    float *floatPointAddress=(float*)pointBaseAddress;
-    for(int i = 0; i < vertexNum; ++i)
-    {
-        floatPointAddress[4 * i] = vertices[3 * i];
-        floatPointAddress[4 * i + 1] = vertices[3 * i + 1];
-        floatPointAddress[4 * i + 2] = vertices[3 * i + 2];
-        floatPointAddress[4 * i + 3] = 1.0;
-    }
+    _vertexBuffer = [_metalContext.device newBufferWithBytes: vertices length: vertexNum * 3 * sizeof(float) options:MTLResourceOptionCPUCacheModeDefault];
+
     //mesh index
     _meshIndexBuffer = [_metalContext.device newBufferWithBytes: indices
-                                                         length: faceNum * 3 * 4
+                                                         length: faceNum * 3 * sizeof(uint32_t)
                                                         options:MTLResourceOptionCPUCacheModeDefault];
     //line index
     uint32_t *lineIndices = new uint32_t[faceNum * 6];
@@ -173,7 +165,7 @@
         lineIndices[6 * i + 5] = indices[3 * i];
     }
     _lineIndexBuffer = [_metalContext.device newBufferWithBytes: lineIndices
-                                                         length: faceNum * 6 * 4
+                                                         length: faceNum * 6 * sizeof(uint32_t)
                                                         options:MTLResourceOptionCPUCacheModeDefault];
     delete[] lineIndices;
 }

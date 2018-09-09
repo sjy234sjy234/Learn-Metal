@@ -15,6 +15,13 @@ struct Vertex
     half4 color;
 };
 
+struct InputFloat3
+{
+    float x;
+    float y;
+    float z;
+};
+
 struct MvpTransform
 {
     float4x4 matrix;
@@ -35,7 +42,7 @@ struct LineColor
     float4 val;
 };
 
-vertex Vertex frameLine_vertex_main(device float4 *vertices [[buffer(0)]],
+vertex Vertex frameLine_vertex_main(device InputFloat3 *vertices [[buffer(0)]],
                                device uint2 *lineIndices [[buffer(1)]],
                                constant MvpTransform *mvpTransform [[buffer(2)]],
                                constant WHRatio *whRatio [[buffer(3)]],
@@ -47,8 +54,9 @@ vertex Vertex frameLine_vertex_main(device float4 *vertices [[buffer(0)]],
     uint lineIndex1=lineIndices[iid].x;
     uint lineIndex2=lineIndices[iid].y;
     
-    float4 position1 = mvpTransform->matrix * vertices[lineIndex1];
-    float4 position2 = mvpTransform->matrix * vertices[lineIndex2];
+    
+    float4 position1 = mvpTransform->matrix * float4(vertices[lineIndex1].x, vertices[lineIndex1].y, vertices[lineIndex1].z, 1.0);
+    float4 position2 = mvpTransform->matrix * float4(vertices[lineIndex2].x, vertices[lineIndex2].y, vertices[lineIndex2].z, 1.0);
     position1 = position1 / position1.w;
     position2 = position2 / position2.w;
     
@@ -96,12 +104,12 @@ fragment half4 frameLine_fragment_main(Vertex inVertex [[stage_in]])
     return inVertex.color;
 }
 
-vertex Vertex frameMesh_vertex_main(device float4 *vertices [[buffer(0)]],
+vertex Vertex frameMesh_vertex_main(device InputFloat3 *vertices [[buffer(0)]],
                                constant MvpTransform *mvpTransform [[buffer(1)]],
                                uint vid [[vertex_id]])
 {
     Vertex vertexOut;
-    vertexOut.position = mvpTransform->matrix * vertices[vid];
+    vertexOut.position = mvpTransform->matrix * float4(vertices[vid].x, vertices[vid].y, vertices[vid].z, 1.0);
     return vertexOut;
 }
 

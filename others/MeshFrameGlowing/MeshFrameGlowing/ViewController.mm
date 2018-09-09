@@ -221,10 +221,6 @@
 
 - (void)redraw
 {
-            static float averageTime=0;
-            static float timeCount=0;
-            NSDate *begain = [NSDate date];
-    
     //mvp matrix
     m_viewTransform = m_orbitControl.getTransform();
     const simd::float4x4 mvpTransform = m_proTransform * m_viewTransform * m_modelTransform;
@@ -233,12 +229,6 @@
     [self.frameGlowingRenderer renderWithMvpMatrix: mvpTransform];
     
     [self.frameTestRenderer renderWithMvpMatrix: mvpTransform];
-    
-            NSDate *end = [NSDate date];
-            float time=[end timeIntervalSinceDate:begain];
-            averageTime=(averageTime*timeCount+time)/(timeCount+1.0);
-            timeCount+=1.0;
-            NSLog(@"%f", averageTime);
 }
 
 - (void)didReceiveMemoryWarning {
