@@ -15,10 +15,19 @@
 @interface FrameRendererEncoder : NSObject
 
 - (instancetype)initWithContext: (MetalContext *)context;
+- (void)setClearColor:(const MTLClearColor) color;
+- (void)setClearDepth:(const double) depth;
 - (void)setThickNess: (float) thickness;
-- (void)setBackColor: (const simd::float4) color;
 - (void)setLineColor: (const simd::float4) color;
-- (void)setupFrameWithVertex: (const float *) vertices andIndex: (const uint32_t *)indices andVertexNum: (int) vertexNum andFaceNum: (int) faceNum;
-- (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer dstColorTexture: (id<MTLTexture>) colorTexture dstDepthTexture: (id<MTLTexture>) depthTexture mvpMatrix: (simd::float4x4)mvpTransform;
+- (void)setupFrameWithVertex: (const float *) vertices
+                    andIndex: (const uint32_t *)indices
+                andVertexNum: (int) vertexNum
+                  andFaceNum: (int) faceNum;
+- (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer
+              dstColorTexture: (id<MTLTexture>) colorTexture
+              dstDepthTexture: (id<MTLTexture>) depthTexture
+                   clearColor: (const BOOL) isClearColor
+                   clearDepth: (const BOOL) isClearDepth
+                    mvpMatrix: (simd::float4x4)mvpTransform;
 
 @end

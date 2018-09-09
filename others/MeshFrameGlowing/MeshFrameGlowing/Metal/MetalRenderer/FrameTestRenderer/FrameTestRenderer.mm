@@ -81,7 +81,8 @@
 
 - (void)setBackColor: (const simd::float4) color
 {
-    [_frameRendererEncoder setBackColor: color];
+    [_frameRendererEncoder setClearColor: MTLClearColorMake(color.x, color.y, color.z, color.w)];
+    
 }
 
 - (void)setLineColor: (const simd::float4) color
@@ -101,7 +102,12 @@
     commandBuffer.label = @"FrameGlowingRenderingCommand";
     
     //encode offscreen frame render process
-    [_frameRendererEncoder encodeToCommandBuffer: commandBuffer dstColorTexture: _colorTexture dstDepthTexture: _depthTexture mvpMatrix: mvpTransform];
+    [_frameRendererEncoder encodeToCommandBuffer: commandBuffer
+                                 dstColorTexture: _colorTexture
+                                 dstDepthTexture: _depthTexture
+                                      clearColor: YES
+                                      clearDepth: YES
+                                       mvpMatrix: mvpTransform];
     
     //encode gaussion process
     [_gaussianBlurEncoder encodeToCommandBuffer: commandBuffer srcTexture: _colorTexture dstTexture: _blurTexture];

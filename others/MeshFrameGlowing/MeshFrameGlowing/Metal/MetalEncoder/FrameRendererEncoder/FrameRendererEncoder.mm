@@ -10,7 +10,8 @@
 
 @interface FrameRendererEncoder ()
 {
-    simd::float4 m_backColor;
+    MTLClearColor m_clearColor;
+    double m_clearDepth;
 }
 
 @property (nonatomic, strong) MetalContext *metalContext;
@@ -99,7 +100,8 @@
 
 - (void)buildResources
 {
-    m_backColor = {0.0, 0.0, 0.0, 1.0};
+    m_clearColor = {1.0, 1.0, 1.0, 1.0};
+    m_clearDepth = 1.0;
     
     _mvpTransformBuffer = [_metalContext.device newBufferWithLength:sizeof(simd::float4x4)
                                                             options:MTLResourceOptionCPUCacheModeDefault];
@@ -117,6 +119,16 @@
     memcpy([_lineColorBuffer contents], &color, sizeof(simd::float4));
 }
 
+- (void)setClearColor:(const MTLClearColor) color
+{
+    m_clearColor = color;
+}
+
+- (void)setClearDepth:(const double) depth
+{
+    m_clearDepth = depth;
+}
+
 - (void)setThickNess: (float) thickness
 {
     thickness = thickness < 0.0 ? 0.0 : thickness;
@@ -124,17 +136,15 @@
     memcpy([_thicknessBuffer contents], &thickness, sizeof(float));
 }
 
-- (void)setBackColor: (const simd::float4) color
-{
-    m_backColor = color;
-}
-
 - (void)setLineColor: (const simd::float4) color
 {
     memcpy([_lineColorBuffer contents], &color, sizeof(simd::float4));
 }
 
-- (void)setupFrameWithVertex: (const float *) vertices andIndex: (const uint32_t *)indices andVertexNum: (int) vertexNum andFaceNum: (int) faceNum
+- (void)setupFrameWithVertex: (const float *) vertices
+                    andIndex: (const uint32_t *)indices
+                andVertexNum: (int) vertexNum
+                  andFaceNum: (int) faceNum
 {
     //vertex
     _vertexBuffer = [_metalContext.device newBufferWithLength: vertexNum * 4 * 4 options:MTLResourceOptionCPUCacheModeDefault];
@@ -168,7 +178,12 @@
     delete[] lineIndices;
 }
 
-- (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer dstColorTexture: (id<MTLTexture>) colorTexture dstDepthTexture: (id<MTLTexture>) depthTexture mvpMatrix: (simd::float4x4)mvpTransform
+- (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer
+              dstColorTexture: (id<MTLTexture>) colorTexture
+              dstDepthTexture: (id<MTLTexture>) depthTexture
+                   clearColor: (const BOOL) isClearColor
+                   clearDepth: (const BOOL) isClearDepth
+                    mvpMatrix: (simd::float4x4)mvpTransform
 {
     if(!_vertexBuffer || !_meshIndexBuffer || !_lineIndexBuffer)
     {
@@ -187,16 +202,20 @@
     {
         MTLRenderPassDescriptor *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
         passDescriptor.colorAttachments[0].texture = colorTexture;
-        passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(m_backColor.x, m_backColor.y, m_backColor.z, m_backColor.w);
-
         passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-        passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-        
+        if(isClearColor)
+        {
+            passDescriptor.colorAttachments[0].clearColor = m_clearColor;
+            passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
+        }
         passDescriptor.depthAttachment.texture = depthTexture;
-        passDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
         passDescriptor.depthAttachment.storeAction = MTLStoreActionStore;
-        passDescriptor.depthAttachment.clearDepth = 1.0;
-        
+        if(isClearDepth)
+        {
+            passDescriptor.depthAttachment.clearDepth = m_clearDepth;
+            passDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
+        }
+
         id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
         
         [commandEncoder setRenderPipelineState:_meshRenderPipeline];
