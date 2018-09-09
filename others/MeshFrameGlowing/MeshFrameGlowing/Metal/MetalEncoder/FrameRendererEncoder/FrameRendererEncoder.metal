@@ -85,9 +85,8 @@ vertex Vertex frameLine_vertex_main(device float4 *vertices [[buffer(0)]],
             break;
     }
     
-    float4 color = lineColor->val;
     outVertex.position.z -= 0.001;
-    outVertex.color = {(half)color.x, (half)color.y, (half)color.z, (half)color.w};
+    outVertex.color = (half4)(lineColor->val);
     
     return outVertex;
 }
