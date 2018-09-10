@@ -24,7 +24,6 @@
                    clearColor: (const BOOL) isClearColor
                    clearDepth: (const BOOL) isClearDepth
                   pointBuffer: (const id<MTLBuffer>) pointBuffer
-                     pointNum: (const int) pNum
                     mvpMatrix: (const simd::float4x4)mvpTransform;
 
 @end

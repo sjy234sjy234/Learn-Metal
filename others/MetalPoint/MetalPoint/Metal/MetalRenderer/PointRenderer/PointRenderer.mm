@@ -89,7 +89,6 @@
                                           clearColor: YES
                                           clearDepth: YES
                                          pointBuffer: pointBuffer
-                                            pointNum: pNum
                                            mvpMatrix: mvpTransform];
         [commandBuffer presentDrawable:drawable];
     }

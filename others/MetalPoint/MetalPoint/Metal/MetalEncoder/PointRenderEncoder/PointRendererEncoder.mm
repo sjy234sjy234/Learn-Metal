@@ -104,7 +104,6 @@
                    clearColor: (const BOOL) isClearColor
                    clearDepth: (const BOOL) isClearDepth
                   pointBuffer: (const id<MTLBuffer>) pointBuffer
-                     pointNum: (const int) pNum
                     mvpMatrix: (const simd::float4x4)mvpTransform
 {
     if(!commandBuffer)
@@ -117,11 +116,13 @@
         NSLog(@"invalid texture");
         return ;
     }
-    if(!pointBuffer || pNum <= 0)
+    if(!pointBuffer)
     {
         NSLog(@"invalid points");
         return;
     }
+    
+    int pNum = pointBuffer.length / (3 * sizeof(float));
     
     memcpy([_mvpTransformBuffer contents], &mvpTransform, sizeof(mvpTransform));
     
