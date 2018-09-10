@@ -200,12 +200,20 @@
             passDescriptor.colorAttachments[0].clearColor = m_clearColor;
             passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
         }
+        else
+        {
+            passDescriptor.colorAttachments[0].loadAction = MTLLoadActionLoad;
+        }
         passDescriptor.depthAttachment.texture = depthTexture;
         passDescriptor.depthAttachment.storeAction = MTLStoreActionStore;
         if(isClearDepth)
         {
             passDescriptor.depthAttachment.clearDepth = m_clearDepth;
             passDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
+        }
+        else
+        {
+            passDescriptor.depthAttachment.loadAction = MTLLoadActionLoad;
         }
 
         id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];

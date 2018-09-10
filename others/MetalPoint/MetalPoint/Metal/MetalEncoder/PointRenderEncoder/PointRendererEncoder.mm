@@ -20,6 +20,7 @@
 @property (nonatomic, strong) id<MTLBuffer> pointSizeBuffer;
 @property (nonatomic, strong) id<MTLBuffer> pointColorBuffer;
 @property (nonatomic, strong) id<MTLBuffer> mvpTransformBuffer;
+@property (nonatomic, strong) id<MTLDepthStencilState> depthState;
 
 @end
 
@@ -57,6 +58,11 @@
     {
         NSLog(@"Error occurred when creating point render pipeline state: %@", error);
     }
+    
+    MTLDepthStencilDescriptor *depthDescriptor = [MTLDepthStencilDescriptor new];
+    depthDescriptor.depthWriteEnabled = YES;
+    depthDescriptor.depthCompareFunction = MTLCompareFunctionLess;
+    _depthState = [_metalContext.device newDepthStencilStateWithDescriptor:depthDescriptor];
 }
 
 - (void)buildResources
@@ -134,6 +140,10 @@
         passDescriptor.colorAttachments[0].clearColor = m_clearColor;
         passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
     }
+    else
+    {
+        passDescriptor.colorAttachments[0].loadAction = MTLLoadActionLoad;
+    }
     passDescriptor.depthAttachment.texture = depthTexture;
     passDescriptor.depthAttachment.storeAction = MTLStoreActionStore;
     if(isClearDepth)
@@ -141,9 +151,14 @@
         passDescriptor.depthAttachment.clearDepth = m_clearDepth;
         passDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
     }
+    else
+    {
+        passDescriptor.depthAttachment.loadAction = MTLLoadActionLoad;
+    }
     
     id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
     [commandEncoder setRenderPipelineState: _pointRenderPipeline];
+    [commandEncoder setDepthStencilState: _depthState];
     [commandEncoder setVertexBuffer: pointBuffer offset:0 atIndex: 0];
     [commandEncoder setVertexBuffer: _pointSizeBuffer offset:0 atIndex: 1];
     [commandEncoder setVertexBuffer: _pointColorBuffer offset:0 atIndex: 2];
