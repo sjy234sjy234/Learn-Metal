@@ -64,12 +64,12 @@
 
 - (void)buildResources
 {
-    const TextureVertex textureVertices[] =
+    const float textureVertices[] =
     {
-        { .position = { -1.0, -1.0, 0, 1 }, .texCoords = { 0.0, 1.0 } },
-        { .position = { -1.0,  1.0, 0, 1 }, .texCoords = { 0.0, 0.0 } },
-        { .position = {  1.0, -1.0, 0, 1 }, .texCoords = { 1.0, 1.0 } },
-        { .position = {  1.0,  1.0, 0, 1 }, .texCoords = { 1.0, 0.0 } }
+        -1.0, -1.0, 0,
+        -1.0,  1.0, 0,
+        1.0, -1.0, 0,
+        1.0,  1.0, 0
     };
     _textureVertexBuffer = [_metalContext.device newBufferWithBytes:textureVertices
                                                              length:sizeof(textureVertices)

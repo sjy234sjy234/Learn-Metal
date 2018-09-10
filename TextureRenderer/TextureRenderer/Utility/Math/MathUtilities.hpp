@@ -2,12 +2,6 @@
 
 using namespace simd;
 
-typedef struct
-{
-    float4 position;
-    float2 texCoords;
-} TextureVertex;
-
 /// Builds a translation matrix that translates by the supplied vector
 float4x4 matrix_float4x4_translation(const float3 &t);
 

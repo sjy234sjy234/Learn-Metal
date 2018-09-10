@@ -12,7 +12,6 @@ using namespace metal;
 struct Vertex
 {
     float4 position [[position]];
-    half4 color;
 };
 
 struct InputFloat3
@@ -47,7 +46,6 @@ vertex Vertex frameLine_vertex_main(device InputFloat3 *vertices [[buffer(0)]],
                                constant MvpTransform *mvpTransform [[buffer(2)]],
                                constant WHRatio *whRatio [[buffer(3)]],
                                constant ThickNess *thickness [[buffer(4)]],
-                               constant LineColor *lineColor [[buffer(5)]],
                                uint vid [[vertex_id]],
                                uint iid [[instance_id]])
 {
@@ -94,14 +92,13 @@ vertex Vertex frameLine_vertex_main(device InputFloat3 *vertices [[buffer(0)]],
     }
     
     outVertex.position.z -= 0.001;
-    outVertex.color = (half4)(lineColor->val);
-    
     return outVertex;
 }
 
-fragment half4 frameLine_fragment_main(Vertex inVertex [[stage_in]])
+fragment half4 frameLine_fragment_main(Vertex inVertex [[stage_in]],
+                                       constant LineColor *lineColor [[buffer(0)]])
 {
-    return inVertex.color;
+    return (half4)lineColor->val;
 }
 
 vertex Vertex frameMesh_vertex_main(device InputFloat3 *vertices [[buffer(0)]],

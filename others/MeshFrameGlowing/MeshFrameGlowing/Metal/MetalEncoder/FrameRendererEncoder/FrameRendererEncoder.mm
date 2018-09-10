@@ -228,7 +228,7 @@
         [commandEncoder setVertexBuffer: _mvpTransformBuffer offset:0 atIndex:2];
         [commandEncoder setVertexBuffer: _whRatioBuffer offset:0 atIndex:3];
         [commandEncoder setVertexBuffer: _thicknessBuffer offset:0 atIndex:4];
-        [commandEncoder setVertexBuffer: _lineColorBuffer offset:0 atIndex:5];
+        [commandEncoder setFragmentBuffer: _lineColorBuffer offset: 0 atIndex:0];
         [commandEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6 instanceCount: _lineIndexBuffer.length / (2 * sizeof(uint32_t))];
         [commandEncoder endEncoding];
     }
