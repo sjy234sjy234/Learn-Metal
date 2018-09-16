@@ -170,6 +170,48 @@
     delete[] lineIndices;
 }
 
+- (void)setupFrameWithQuadrangleVertex: (const float *) vertices
+                              andIndex: (const uint32_t *)indices
+                          andVertexNum: (int) vertexNum
+                            andFaceNum: (int) faceNum
+{
+    //vertex
+    _vertexBuffer = [_metalContext.device newBufferWithBytes: vertices length: vertexNum * 3 * sizeof(float) options:MTLResourceOptionCPUCacheModeDefault];
+    
+    //mesh index
+    uint32_t *meshIndices = new uint32_t[faceNum * 6];
+    for(int i = 0; i < faceNum; ++i)
+    {
+        meshIndices[6 * i] = indices[4 * i];
+        meshIndices[6 * i + 1] = indices[4 * i + 1];
+        meshIndices[6 * i + 2] = indices[4 * i + 2];
+        meshIndices[6 * i + 3] = indices[4 * i];
+        meshIndices[6 * i + 4] = indices[4 * i + 2];
+        meshIndices[6 * i + 5] = indices[4 * i + 3];
+    }
+    _meshIndexBuffer = [_metalContext.device newBufferWithBytes: meshIndices
+                                                         length: faceNum * 6 * sizeof(uint32_t)
+                                                        options:MTLResourceOptionCPUCacheModeDefault];
+    delete[] meshIndices;
+    //line index
+    uint32_t *lineIndices = new uint32_t[faceNum * 8];
+    for(int i = 0; i < faceNum; ++i)
+    {
+        lineIndices[8 * i] = indices[4 * i];
+        lineIndices[8 * i + 1] = indices[4 * i + 1];
+        lineIndices[8 * i + 2] = indices[4 * i + 1];
+        lineIndices[8 * i + 3] = indices[4 * i + 2];
+        lineIndices[8 * i + 4] = indices[4 * i + 2];
+        lineIndices[8 * i + 5] = indices[4 * i + 3];
+        lineIndices[8 * i + 6] = indices[4 * i + 3];
+        lineIndices[8 * i + 7] = indices[4 * i];
+    }
+    _lineIndexBuffer = [_metalContext.device newBufferWithBytes: lineIndices
+                                                         length: faceNum * 8 * sizeof(uint32_t)
+                                                        options:MTLResourceOptionCPUCacheModeDefault];
+    delete[] lineIndices;
+}
+
 - (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer
               dstColorTexture: (id<MTLTexture>) colorTexture
               dstDepthTexture: (id<MTLTexture>) depthTexture

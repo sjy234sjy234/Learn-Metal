@@ -83,6 +83,14 @@
     [_frameRendererEncoder setupFrameWithVertex: vertices andIndex: indices andVertexNum: vertexNum andFaceNum: faceNum];
 }
 
+- (void)setupFrameWithQuadrangleVertex: (const float *) vertices
+                              andIndex: (const uint32_t *)indices
+                          andVertexNum: (const int) vertexNum
+                            andFaceNum: (const int) faceNum
+{
+    [_frameRendererEncoder setupFrameWithQuadrangleVertex: vertices andIndex: indices andVertexNum: vertexNum andFaceNum: faceNum];
+}
+
 - (void)renderWithMvpMatrix: (const simd::float4x4)mvpTransform
 {
     //new commander buffer

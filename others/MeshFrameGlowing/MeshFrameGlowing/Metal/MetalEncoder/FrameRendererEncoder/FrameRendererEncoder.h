@@ -23,6 +23,10 @@
                     andIndex: (const uint32_t *)indices
                 andVertexNum: (int) vertexNum
                   andFaceNum: (int) faceNum;
+- (void)setupFrameWithQuadrangleVertex: (const float *) vertices
+                    andIndex: (const uint32_t *)indices
+                andVertexNum: (int) vertexNum
+                  andFaceNum: (int) faceNum;
 - (void)encodeToCommandBuffer: (id<MTLCommandBuffer>) commandBuffer
               dstColorTexture: (id<MTLTexture>) colorTexture
               dstDepthTexture: (id<MTLTexture>) depthTexture

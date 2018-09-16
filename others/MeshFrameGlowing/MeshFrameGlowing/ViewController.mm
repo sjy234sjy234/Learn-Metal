@@ -77,6 +77,7 @@
 - (void)buildFrameRenderer
 {
     /*
+     //test for quadrangle mesh frame
     const float cubeVertices[] =
     {
         -100,  100,  100,
@@ -90,20 +91,31 @@
     };
     const uint32_t cubeIndices[]=
     {
-        3, 2, 6, 6, 7, 3,
-        4, 5, 1, 1, 0, 4,
-        4, 0, 3, 3, 7, 4,
-        1, 5, 6, 6, 2, 1,
-        0, 1, 2, 2, 3, 0,
-        7, 6, 5, 5, 4, 7
+        3, 2, 6, 7,
+        4, 5, 1, 0,
+        4, 0, 3, 7,
+        1, 5, 6, 2,
+        0, 1, 2, 3,
+        7, 6, 5, 4
     };
-    self.frameRenderer = [[FrameRenderer alloc] initWithContext: _metalContext];
-    [self.frameRenderer setupFrameWithVertex:cubeVertices andIndex: cubeIndices andVertexNum: 8 andFaceNum: 12];
-    [self.frameRenderer setThickNess: 0.005];
+    
+    //frame test renderer rendering middle result
+    self.frameTestRenderer = [[FrameTestRenderer alloc] initWithLayer1: _testMetalView1.metalLayer andLayer2: _testMetalView2.metalLayer andLayer3: _testMetalView3.metalLayer  andContext: _metalContext andBlurSigma: 3.0 andBlendAlpha: 0.5];
+    [self.frameTestRenderer setupFrameWithQuadrangleVertex: cubeVertices andIndex: cubeIndices andVertexNum: 8 andFaceNum: 6];
+    [self.frameTestRenderer setThickNess: 0.002];
+    [self.frameTestRenderer setBackColor: {24.0 / 255, 31.0 / 255, 50.0 / 255, 1}];
+    [self.frameTestRenderer setLineColor: {36.0 / 255, 210.0 / 255, 214.0 / 255, 1.0}];
+    
+    //frame glowing renderer
+    self.frameGlowingRenderer = [[FrameGlowingRenderer alloc] initWithLayer: _myMetalView.metalLayer andContext: _metalContext andBlurSigma: 3.0 andBlendAlpha: 0.5];
+    [self.frameGlowingRenderer setupFrameWithQuadrangleVertex: cubeVertices andIndex: cubeIndices andVertexNum: 8 andFaceNum: 6];
+    [self.frameGlowingRenderer setThickNess: 0.002];
+    [self.frameGlowingRenderer setBackColor: {24.0 / 255, 31.0 / 255, 50.0 / 255, 1}];
+    [self.frameGlowingRenderer setLineColor: {36.0 / 255, 210.0 / 255, 214.0 / 255, 1.0}];
     
     //projection matrix
     simd::float4 onesFloat4={1.0,1.0,1.0,1.0};
-    const CGSize drawableSize = self.myMetalView00.metalLayer.drawableSize ;
+    const CGSize drawableSize = self.myMetalView.metalLayer.drawableSize ;
     const float aspect = drawableSize.width / drawableSize.height;
     const float fov = (56.56 * M_PI) / 180.0;
     const float near = 100;
@@ -119,7 +131,7 @@
     //mvp matrix
     const simd::float4x4 mvpTransform = m_proTransform * m_viewTransform * m_modelTransform;
     */
-     
+    
      //load asset and parse vertex and index
      NSString *resourcepath = [[NSBundle mainBundle] resourcePath];
      NSString *mesh_path = [resourcepath stringByAppendingString:@"/sjy.bin"];
