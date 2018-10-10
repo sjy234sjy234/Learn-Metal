@@ -15,7 +15,10 @@
 - (void)setThickNess: (const float) thickness;
 - (void)setBackColor: (const simd::float4) color;
 - (void)setLineColor: (const simd::float4) color;
-- (void)setupFrameWithVertex: (const float *) vertices andIndex: (const uint32_t *)indices andVertexNum: (const int) vertexNum andFaceNum: (const int) faceNum;
+- (void)setupFrameWithVertex: (const float *) vertices
+                    andIndex: (const uint32_t *)indices
+                andVertexNum: (const int) vertexNum
+                  andFaceNum: (const int) faceNum;
 - (void)setupFrameWithQuadrangleVertex: (const float *) vertices
                               andIndex: (const uint32_t *)indices
                           andVertexNum: (const int) vertexNum

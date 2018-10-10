@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BBE2887216DD1EF008F5E2A /* MeshDepthMaskEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE2886216DD1EF008F5E2A /* MeshDepthMaskEncoder.mm */; };
+		3BBE2889216DD1FA008F5E2A /* MeshDepthMaskEncoder.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE2888216DD1FA008F5E2A /* MeshDepthMaskEncoder.metal */; };
+		3BBE288C216DD762008F5E2A /* LineRendererEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE288B216DD762008F5E2A /* LineRendererEncoder.mm */; };
+		3BBE288E216DD76D008F5E2A /* LineRendererEncoder.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE288D216DD76D008F5E2A /* LineRendererEncoder.metal */; };
 		B0138A582140EA70002724C5 /* FrameGlowingRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B0138A572140EA70002724C5 /* FrameGlowingRenderer.mm */; };
 		B07130B22140FB2A008F6228 /* FrameTestRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B07130B12140FB2A008F6228 /* FrameTestRenderer.mm */; };
 		B0A0BE66213FABDB00514B3B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0BE65213FABDB00514B3B /* AppDelegate.m */; };
@@ -21,8 +25,6 @@
 		B0A0BE93213FAE3000514B3B /* MetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0BE85213FAE3000514B3B /* MetalView.m */; };
 		B0A0BE94213FAE3000514B3B /* TextureRendererEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = B0A0BE89213FAE3000514B3B /* TextureRendererEncoder.mm */; };
 		B0A0BE95213FAE3000514B3B /* TextureRendererEncoder.metal in Sources */ = {isa = PBXBuildFile; fileRef = B0A0BE8B213FAE3000514B3B /* TextureRendererEncoder.metal */; };
-		B0A0BE96213FAE3000514B3B /* FrameRendererEncoder.metal in Sources */ = {isa = PBXBuildFile; fileRef = B0A0BE8D213FAE3000514B3B /* FrameRendererEncoder.metal */; };
-		B0A0BE97213FAE3000514B3B /* FrameRendererEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = B0A0BE8E213FAE3000514B3B /* FrameRendererEncoder.mm */; };
 		B0A0BE9B213FB2F800514B3B /* GaussianBlurEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0BE9A213FB2F800514B3B /* GaussianBlurEncoder.m */; };
 		B0A0BEA0213FC9DF00514B3B /* ImageBlenderEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0BE9F213FC9DF00514B3B /* ImageBlenderEncoder.m */; };
 		B0A0BEA2213FCC5000514B3B /* ImageBlenderEncoder.metal in Sources */ = {isa = PBXBuildFile; fileRef = B0A0BEA1213FCC5000514B3B /* ImageBlenderEncoder.metal */; };
@@ -30,6 +32,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3BBE2885216DD1EF008F5E2A /* MeshDepthMaskEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeshDepthMaskEncoder.h; sourceTree = "<group>"; };
+		3BBE2886216DD1EF008F5E2A /* MeshDepthMaskEncoder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MeshDepthMaskEncoder.mm; sourceTree = "<group>"; };
+		3BBE2888216DD1FA008F5E2A /* MeshDepthMaskEncoder.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MeshDepthMaskEncoder.metal; sourceTree = "<group>"; };
+		3BBE288A216DD762008F5E2A /* LineRendererEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineRendererEncoder.h; sourceTree = "<group>"; };
+		3BBE288B216DD762008F5E2A /* LineRendererEncoder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LineRendererEncoder.mm; sourceTree = "<group>"; };
+		3BBE288D216DD76D008F5E2A /* LineRendererEncoder.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LineRendererEncoder.metal; sourceTree = "<group>"; };
 		B0138A562140EA70002724C5 /* FrameGlowingRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrameGlowingRenderer.h; sourceTree = "<group>"; };
 		B0138A572140EA70002724C5 /* FrameGlowingRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FrameGlowingRenderer.mm; sourceTree = "<group>"; };
 		B07130B02140FB2A008F6228 /* FrameTestRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrameTestRenderer.h; sourceTree = "<group>"; };
@@ -55,9 +63,6 @@
 		B0A0BE89213FAE3000514B3B /* TextureRendererEncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TextureRendererEncoder.mm; sourceTree = "<group>"; };
 		B0A0BE8A213FAE3000514B3B /* TextureRendererEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureRendererEncoder.h; sourceTree = "<group>"; };
 		B0A0BE8B213FAE3000514B3B /* TextureRendererEncoder.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = TextureRendererEncoder.metal; sourceTree = "<group>"; };
-		B0A0BE8D213FAE3000514B3B /* FrameRendererEncoder.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = FrameRendererEncoder.metal; sourceTree = "<group>"; };
-		B0A0BE8E213FAE3000514B3B /* FrameRendererEncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FrameRendererEncoder.mm; sourceTree = "<group>"; };
-		B0A0BE8F213FAE3000514B3B /* FrameRendererEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameRendererEncoder.h; sourceTree = "<group>"; };
 		B0A0BE99213FB2F800514B3B /* GaussianBlurEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GaussianBlurEncoder.h; sourceTree = "<group>"; };
 		B0A0BE9A213FB2F800514B3B /* GaussianBlurEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GaussianBlurEncoder.m; sourceTree = "<group>"; };
 		B0A0BE9E213FC9DF00514B3B /* ImageBlenderEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageBlenderEncoder.h; sourceTree = "<group>"; };
@@ -77,6 +82,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3BBE2883216DCFE6008F5E2A /* MeshDepthMaskEncoder */ = {
+			isa = PBXGroup;
+			children = (
+				3BBE2885216DD1EF008F5E2A /* MeshDepthMaskEncoder.h */,
+				3BBE2886216DD1EF008F5E2A /* MeshDepthMaskEncoder.mm */,
+				3BBE2888216DD1FA008F5E2A /* MeshDepthMaskEncoder.metal */,
+			);
+			path = MeshDepthMaskEncoder;
+			sourceTree = "<group>";
+		};
+		3BBE2884216DD06E008F5E2A /* LineRendererEncoder */ = {
+			isa = PBXGroup;
+			children = (
+				3BBE288A216DD762008F5E2A /* LineRendererEncoder.h */,
+				3BBE288B216DD762008F5E2A /* LineRendererEncoder.mm */,
+				3BBE288D216DD76D008F5E2A /* LineRendererEncoder.metal */,
+			);
+			path = LineRendererEncoder;
+			sourceTree = "<group>";
+		};
 		B07130AF2140FB0F008F6228 /* FrameTestRenderer */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,10 +197,11 @@
 		B0A0BE87213FAE3000514B3B /* MetalEncoder */ = {
 			isa = PBXGroup;
 			children = (
+				3BBE2884216DD06E008F5E2A /* LineRendererEncoder */,
+				3BBE2883216DCFE6008F5E2A /* MeshDepthMaskEncoder */,
 				B0A0BE9D213FB96D00514B3B /* ImageBlenderEncoder */,
 				B0A0BE98213FB2E100514B3B /* GaussianBlurEncoder */,
 				B0A0BE88213FAE3000514B3B /* TextureRendererEncoder */,
-				B0A0BE8C213FAE3000514B3B /* FrameRendererEncoder */,
 			);
 			path = MetalEncoder;
 			sourceTree = "<group>";
@@ -188,16 +214,6 @@
 				B0A0BE8B213FAE3000514B3B /* TextureRendererEncoder.metal */,
 			);
 			path = TextureRendererEncoder;
-			sourceTree = "<group>";
-		};
-		B0A0BE8C213FAE3000514B3B /* FrameRendererEncoder */ = {
-			isa = PBXGroup;
-			children = (
-				B0A0BE8D213FAE3000514B3B /* FrameRendererEncoder.metal */,
-				B0A0BE8E213FAE3000514B3B /* FrameRendererEncoder.mm */,
-				B0A0BE8F213FAE3000514B3B /* FrameRendererEncoder.h */,
-			);
-			path = FrameRendererEncoder;
 			sourceTree = "<group>";
 		};
 		B0A0BE98213FB2E100514B3B /* GaussianBlurEncoder */ = {
@@ -308,19 +324,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BBE2887216DD1EF008F5E2A /* MeshDepthMaskEncoder.mm in Sources */,
+				3BBE2889216DD1FA008F5E2A /* MeshDepthMaskEncoder.metal in Sources */,
 				B07130B22140FB2A008F6228 /* FrameTestRenderer.mm in Sources */,
 				B0A0BE69213FABDC00514B3B /* ViewController.mm in Sources */,
 				B0138A582140EA70002724C5 /* FrameGlowingRenderer.mm in Sources */,
 				B0A0BE9B213FB2F800514B3B /* GaussianBlurEncoder.m in Sources */,
 				B0A0BE91213FAE3000514B3B /* MathUtilities.cpp in Sources */,
 				B0A0BE94213FAE3000514B3B /* TextureRendererEncoder.mm in Sources */,
-				B0A0BE96213FAE3000514B3B /* FrameRendererEncoder.metal in Sources */,
+				3BBE288C216DD762008F5E2A /* LineRendererEncoder.mm in Sources */,
+				3BBE288E216DD76D008F5E2A /* LineRendererEncoder.metal in Sources */,
 				B0A0BE74213FABDC00514B3B /* main.m in Sources */,
 				B0A0BEA2213FCC5000514B3B /* ImageBlenderEncoder.metal in Sources */,
 				B0A0BE92213FAE3000514B3B /* MetalContext.mm in Sources */,
 				B0A0BE95213FAE3000514B3B /* TextureRendererEncoder.metal in Sources */,
 				B0A0BE90213FAE3000514B3B /* OrbitControl.cpp in Sources */,
-				B0A0BE97213FAE3000514B3B /* FrameRendererEncoder.mm in Sources */,
 				B0A0BE66213FABDB00514B3B /* AppDelegate.m in Sources */,
 				B0A0BE93213FAE3000514B3B /* MetalView.m in Sources */,
 				B0A0BEA0213FC9DF00514B3B /* ImageBlenderEncoder.m in Sources */,

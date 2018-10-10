@@ -7,7 +7,8 @@
 //
 
 #import "FrameTestRenderer.h"
-#import "FrameRendererEncoder.h"
+#import "MeshDepthMaskEncoder.h"
+#import "LineRendererEncoder.h"
 #import "GaussianBlurEncoder.h"
 #import "ImageBlenderEncoder.h"
 #import "TextureRendererEncoder.h"
@@ -18,7 +19,8 @@
 @property (nonatomic, strong) CAMetalLayer *layer2;
 @property (nonatomic, strong) CAMetalLayer *layer3;
 @property (nonatomic, strong) MetalContext *metalContext;
-@property (nonatomic, strong) FrameRendererEncoder *frameRendererEncoder;
+@property (nonatomic, strong) MeshDepthMaskEncoder *meshDepthMaskEncoder;
+@property (nonatomic, strong) LineRendererEncoder *lineRendererEncoder;
 @property (nonatomic, strong) GaussianBlurEncoder *gaussianBlurEncoder;
 @property (nonatomic, strong) ImageBlenderEncoder *imageBlenderEncoder;
 @property (nonatomic, strong) TextureRendererEncoder *textureRendererEncoder;
@@ -27,6 +29,10 @@
 @property (nonatomic, strong) id<MTLTexture> blurTexture;
 @property (nonatomic, strong) id<MTLTexture> glowTexture;
 @property (nonatomic, strong) id<MTLTexture> depthTexture;
+
+@property (nonatomic, strong) id<MTLBuffer> vertexBuffer;
+@property (nonatomic, strong) id<MTLBuffer> meshIndexBuffer;
+@property (nonatomic, strong) id<MTLBuffer> lineIndexBuffer;
 
 @end
 
@@ -46,7 +52,8 @@
         _layer2 = layer2;
         _layer3 = layer3;
         _metalContext=context;
-        self.frameRendererEncoder = [[FrameRendererEncoder alloc] initWithContext: _metalContext];
+        self.meshDepthMaskEncoder = [[MeshDepthMaskEncoder alloc] initWithContext: _metalContext];
+        self.lineRendererEncoder = [[LineRendererEncoder alloc] initWithContext: _metalContext];
         self.gaussianBlurEncoder = [[GaussianBlurEncoder alloc] initWithContext: _metalContext andSigma: sigma];
         self.imageBlenderEncoder = [[ImageBlenderEncoder alloc] initWithContext: _metalContext andAlpha: alpha];
         self.textureRendererEncoder = [[TextureRendererEncoder alloc] initWithContext: _metalContext];
@@ -76,23 +83,48 @@
 
 - (void)setThickNess: (const float) thickness
 {
-    [_frameRendererEncoder setThickNess: thickness];
+    [_lineRendererEncoder setThickNess: thickness];
 }
 
 - (void)setBackColor: (const simd::float4) color
 {
-    [_frameRendererEncoder setClearColor: MTLClearColorMake(color.x, color.y, color.z, color.w)];
-    
+    MTLClearColor clearColor = MTLClearColorMake(color.x, color.y, color.z, color.w);
+    [_meshDepthMaskEncoder setClearColor: clearColor];
+    [_lineRendererEncoder setClearColor: clearColor];
 }
 
 - (void)setLineColor: (const simd::float4) color
 {
-    [_frameRendererEncoder setLineColor: color];
+    [_lineRendererEncoder setLineColor: color];
 }
 
-- (void)setupFrameWithVertex: (const float *) vertices andIndex: (const uint32_t *)indices andVertexNum: (const int) vertexNum andFaceNum: (const int) faceNum
+- (void)setupFrameWithVertex: (const float *) vertices
+                    andIndex: (const uint32_t *)indices
+                andVertexNum: (const int) vertexNum
+                  andFaceNum: (const int) faceNum
 {
-    [_frameRendererEncoder setupFrameWithVertex: vertices andIndex: indices andVertexNum: vertexNum andFaceNum: faceNum];
+    //vertex
+    _vertexBuffer = [_metalContext.device newBufferWithBytes: vertices length: vertexNum * 3 * sizeof(float) options:MTLResourceOptionCPUCacheModeDefault];
+    
+    //mesh index
+    _meshIndexBuffer = [_metalContext.device newBufferWithBytes: indices
+                                                         length: faceNum * 3 * sizeof(uint32_t)
+                                                        options:MTLResourceOptionCPUCacheModeDefault];
+    //line index
+    uint32_t *lineIndices = new uint32_t[faceNum * 6];
+    for(int i = 0; i < faceNum; ++i)
+    {
+        lineIndices[6 * i] = indices[3 * i];
+        lineIndices[6 * i + 1] = indices[3 * i + 1];
+        lineIndices[6 * i + 2] = indices[3 * i + 1];
+        lineIndices[6 * i + 3] = indices[3 * i + 2];
+        lineIndices[6 * i + 4] = indices[3 * i + 2];
+        lineIndices[6 * i + 5] = indices[3 * i];
+    }
+    _lineIndexBuffer = [_metalContext.device newBufferWithBytes: lineIndices
+                                                         length: faceNum * 6 * sizeof(uint32_t)
+                                                        options:MTLResourceOptionCPUCacheModeDefault];
+    delete[] lineIndices;
 }
 
 - (void)setupFrameWithQuadrangleVertex: (const float *) vertices
@@ -100,7 +132,41 @@
                           andVertexNum: (const int) vertexNum
                             andFaceNum: (const int) faceNum
 {
-    [_frameRendererEncoder setupFrameWithQuadrangleVertex: vertices andIndex: indices andVertexNum: vertexNum andFaceNum: faceNum];
+    //vertex
+    _vertexBuffer = [_metalContext.device newBufferWithBytes: vertices length: vertexNum * 3 * sizeof(float) options:MTLResourceOptionCPUCacheModeDefault];
+    
+    //mesh index
+    uint32_t *meshIndices = new uint32_t[faceNum * 6];
+    for(int i = 0; i < faceNum; ++i)
+    {
+        meshIndices[6 * i] = indices[4 * i];
+        meshIndices[6 * i + 1] = indices[4 * i + 1];
+        meshIndices[6 * i + 2] = indices[4 * i + 2];
+        meshIndices[6 * i + 3] = indices[4 * i];
+        meshIndices[6 * i + 4] = indices[4 * i + 2];
+        meshIndices[6 * i + 5] = indices[4 * i + 3];
+    }
+    _meshIndexBuffer = [_metalContext.device newBufferWithBytes: meshIndices
+                                                         length: faceNum * 6 * sizeof(uint32_t)
+                                                        options:MTLResourceOptionCPUCacheModeDefault];
+    delete[] meshIndices;
+    //line index
+    uint32_t *lineIndices = new uint32_t[faceNum * 8];
+    for(int i = 0; i < faceNum; ++i)
+    {
+        lineIndices[8 * i] = indices[4 * i];
+        lineIndices[8 * i + 1] = indices[4 * i + 1];
+        lineIndices[8 * i + 2] = indices[4 * i + 1];
+        lineIndices[8 * i + 3] = indices[4 * i + 2];
+        lineIndices[8 * i + 4] = indices[4 * i + 2];
+        lineIndices[8 * i + 5] = indices[4 * i + 3];
+        lineIndices[8 * i + 6] = indices[4 * i + 3];
+        lineIndices[8 * i + 7] = indices[4 * i];
+    }
+    _lineIndexBuffer = [_metalContext.device newBufferWithBytes: lineIndices
+                                                         length: faceNum * 8 * sizeof(uint32_t)
+                                                        options:MTLResourceOptionCPUCacheModeDefault];
+    delete[] lineIndices;
 }
 
 - (void)renderWithMvpMatrix: (const simd::float4x4)mvpTransform
@@ -110,12 +176,24 @@
     commandBuffer.label = @"FrameGlowingRenderingCommand";
     
     //encode offscreen frame render process
-    [_frameRendererEncoder encodeToCommandBuffer: commandBuffer
+    //encode mesh depth mask
+    [_meshDepthMaskEncoder encodeToCommandBuffer: commandBuffer
                                  dstColorTexture: _colorTexture
                                  dstDepthTexture: _depthTexture
                                       clearColor: YES
                                       clearDepth: YES
+                                     pointBuffer: _vertexBuffer
+                                     indexBuffer: _meshIndexBuffer
                                        mvpMatrix: mvpTransform];
+    //encode line renderer
+    [_lineRendererEncoder encodeToCommandBuffer: commandBuffer
+                                dstColorTexture: _colorTexture
+                                dstDepthTexture: _depthTexture
+                                     clearColor: NO
+                                     clearDepth: NO
+                                    pointBuffer: _vertexBuffer
+                                    indexBuffer: _lineIndexBuffer
+                                      mvpMatrix: mvpTransform];
     
     //encode gaussion process
     [_gaussianBlurEncoder encodeToCommandBuffer: commandBuffer srcTexture: _colorTexture dstTexture: _blurTexture];

@@ -1,8 +1,8 @@
 //
-//  FrameRendererEncoder.metal
-//  MeshFrame
+//  LineRendererEncoder.metal
+//  MeshFrameGlowing
 //
-//  Created by  沈江洋 on 2018/8/29.
+//  Created by 美戴科技 on 2018/10/10.
 //  Copyright © 2018  沈江洋. All rights reserved.
 //
 
@@ -41,20 +41,20 @@ struct LineColor
     float4 val;
 };
 
-vertex Vertex frameLine_vertex_main(device InputFloat3 *vertices [[buffer(0)]],
-                               device uint2 *lineIndices [[buffer(1)]],
-                               constant MvpTransform *mvpTransform [[buffer(2)]],
-                               constant WHRatio *whRatio [[buffer(3)]],
-                               constant ThickNess *thickness [[buffer(4)]],
-                               uint vid [[vertex_id]],
-                               uint iid [[instance_id]])
+vertex Vertex lineRendererEncoder_vertex_main(device InputFloat3 *vertices [[buffer(0)]],
+                                    device uint2 *lineIndices [[buffer(1)]],
+                                    constant float4x4 &mvpTransform [[buffer(2)]],
+                                    constant WHRatio *whRatio [[buffer(3)]],
+                                    constant ThickNess *thickness [[buffer(4)]],
+                                    uint vid [[vertex_id]],
+                                    uint iid [[instance_id]])
 {
     uint lineIndex1=lineIndices[iid].x;
     uint lineIndex2=lineIndices[iid].y;
     
     
-    float4 position1 = mvpTransform->matrix * float4(vertices[lineIndex1].x, vertices[lineIndex1].y, vertices[lineIndex1].z, 1.0);
-    float4 position2 = mvpTransform->matrix * float4(vertices[lineIndex2].x, vertices[lineIndex2].y, vertices[lineIndex2].z, 1.0);
+    float4 position1 = mvpTransform * float4(vertices[lineIndex1].x, vertices[lineIndex1].y, vertices[lineIndex1].z, 1.0);
+    float4 position2 = mvpTransform * float4(vertices[lineIndex2].x, vertices[lineIndex2].y, vertices[lineIndex2].z, 1.0);
     position1 = position1 / position1.w;
     position2 = position2 / position2.w;
     
@@ -95,24 +95,8 @@ vertex Vertex frameLine_vertex_main(device InputFloat3 *vertices [[buffer(0)]],
     return outVertex;
 }
 
-fragment half4 frameLine_fragment_main(Vertex inVertex [[stage_in]],
+fragment half4 lineRendererEncoder_fragment_main(Vertex inVertex [[stage_in]],
                                        constant LineColor *lineColor [[buffer(0)]])
 {
     return (half4)lineColor->val;
 }
-
-vertex Vertex frameMesh_vertex_main(device InputFloat3 *vertices [[buffer(0)]],
-                               constant MvpTransform *mvpTransform [[buffer(1)]],
-                               uint vid [[vertex_id]])
-{
-    Vertex vertexOut;
-    vertexOut.position = mvpTransform->matrix * float4(vertices[vid].x, vertices[vid].y, vertices[vid].z, 1.0);
-    return vertexOut;
-}
-
-fragment half4 frameMesh_fragment_main(Vertex vertexIn [[stage_in]])
-{
-    return {1.0,1.0,1.0,0.0};
-}
-
-
